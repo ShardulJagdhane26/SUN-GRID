@@ -1,1 +1,8 @@
 # SUN-GRID
+This project aims to predict solar energy generation by utilizing meteorological data collected from the HI-SEAS weather station between September and December 2016, during Mission IV and Mission V. The dataset includes several key weather parameters such as solar radiation, temperature, humidity, wind speed, wind direction, barometric pressure, and sunrise/sunset times. These features are essential in estimating solar energy output, which is influenced by various environmental factors.
+
+The primary objective of this project is to develop accurate predictive models using machine learning techniques. The process starts with loading and cleaning the data, followed by feature selection to identify the most relevant predictors of solar radiation. Various feature engineering techniques, such as transformations (BoxCox, Log, Min-Max, and Standardization), are applied to improve model performance.
+
+The project employs machine learning algorithms, including XGBoost and MultiLayer Perceptron (MLP), to model the relationship between the meteorological variables and solar energy generation. XGBoost, known for its high performance, is used to capture non-linear relationships in the data, while MLP, a type of artificial neural network, is used to assess the performance of deep learning models in this context.
+
+By comparing the results of these models, the project evaluates their ability to predict solar radiation, which is crucial for optimizing solar energy systems, managing resources, and contributing to sustainable energy practices. The project concludes with insights into the performance of the different models and their practical applications in renewable energy forecasting and management.
