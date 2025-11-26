@@ -1,0 +1,358 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SunGrid</title>
+    <!-- Load Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Setting the universal font to Consolas, as requested */
+        body {
+            font-family: Consolas, "Courier New", monospace;
+            /* Deep Black/Charcoal Background */
+            background: #0a0a0a; 
+            color: #f1f5f9; /* Light text */
+            line-height: 1.6;
+        }
+        /* Custom scrollbar for dark mode contrast */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #475569; /* Slate 600 */
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #64748b; /* Slate 500 */
+        }
+        
+        /* Loading animation for analysis - color set to bright sky blue */
+        .dot-pulse {
+            display: inline-flex;
+            gap: 4px;
+            align-items: center;
+        }
+        .dot-pulse::before,
+        .dot-pulse::after,
+        .dot {
+            content: '';
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            /* Bright Sky Blue for high contrast */
+            background-color: #38bdf8; 
+            animation: pulse 1.5s infinite ease-in-out;
+        }
+        .dot-pulse::before {
+            animation-delay: -0.3s;
+        }
+        .dot-pulse::after {
+            animation-delay: -0.15s;
+        }
+        @keyframes pulse {
+            0%, 100% { transform: scale(0.6); opacity: 0.5; }
+            50% { transform: scale(1); opacity: 1; }
+        }
+        
+        /* Ensure inputs and buttons use the monospace font for a technical feel */
+        input, button, select {
+            font-family: Consolas, "Courier New", monospace;
+        }
+        
+        /* Transition utility for cards */
+        .card-transition {
+            transition: all 0.2s ease-in-out;
+        }
+    </style>
+</head>
+<body class="p-4 sm:p-6 lg:p-8 bg-gray-950 text-slate-100">
+    <div class="max-w-6xl mx-auto">
+        
+        <!-- Header Section -->
+        <header class="mb-8 pb-4 border-b border-gray-700">
+            <!-- Logo/Title color remains vibrant -->
+            <h1 class="text-4xl font-extrabold text-sky-400 mb-2 flex items-center gap-4">
+                <span class="text-5xl">🌤️</span> SunGrid
+            </h1>
+            <h2 class="text-2xl font-semibold text-gray-200">Manage and analyze solar energy potential</h2>
+            <p class="text-gray-400 mt-2 text-sm max-w-3xl">
+                SunGrid uses XGBoost and practical AI analysis to provide clear, dependable solar irradiance forecasts.
+                Built for energy management, it translates real weather data and proven machine learning into actionable operational insights.
+            </p>
+        </header>
+
+        <main class="grid lg:grid-cols-2 gap-6">
+            
+            <!-- COLUMN 1: Inputs and FEATURE IMPORTANCE -->
+            <div class="flex flex-col gap-6">
+
+                <!-- 1. Weather Inputs Card -->
+                <section class="bg-gray-900 rounded-xl shadow-2xl p-6 border border-gray-800 card-transition hover:scale-[1.005] shadow-black/60" aria-labelledby="inputs-heading">
+                    <h2 id="inputs-heading" class="text-xl font-bold text-gray-100 mb-4 border-b border-gray-800 pb-2">Weather Inputs</h2>
+                    <form id="predict-form">
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <div>
+                                <label for="temperature" class="block text-sm font-medium text-gray-400 mb-1">Temperature (°F)</label>
+                                <input id="temperature" type="number" step="0.1" required value="75" class="w-full p-3 border border-gray-700 rounded-lg bg-gray-950 focus:ring-sky-500 focus:border-sky-500 text-gray-200 shadow-inner">
+                            </div>
+                            <div>
+                                <label for="pressure" class="block text-sm font-medium text-gray-400 mb-1">Pressure (inHg)</label>
+                                <input id="pressure" type="number" step="0.01" required value="30.15" class="w-full p-3 border border-gray-700 rounded-lg bg-gray-950 focus:ring-sky-500 focus:border-sky-500 text-gray-200 shadow-inner">
+                            </div>
+                            <div>
+                                <label for="humidity" class="block text-sm font-medium text-gray-400 mb-1">Humidity (%)</label>
+                                <input id="humidity" type="number" step="0.1" required value="50" class="w-full p-3 border border-gray-700 rounded-lg bg-gray-950 focus:ring-sky-500 focus:border-sky-500 text-gray-200 shadow-inner">
+                            </div>
+                            <div>
+                                <label for="windSpeed" class="block text-sm font-medium text-gray-400 mb-1">Wind Speed (mph)</label>
+                                <input id="windSpeed" type="number" step="0.1" required value="5" class="w-full p-3 border border-gray-700 rounded-lg bg-gray-950 focus:ring-sky-500 focus:border-sky-500 text-gray-200 shadow-inner">
+                            </div>
+                            <div class="sm:col-span-2">
+                                <label for="windDirection" class="block text-sm font-medium text-gray-400 mb-1">Wind Direction (°)</label>
+                                <input id="windDirection" type="number" step="1" required value="180" class="w-full p-3 border border-gray-700 rounded-lg bg-gray-950 focus:ring-sky-500 focus:border-sky-500 text-gray-200 shadow-inner">
+                            </div>
+                        </div>
+                        
+                        <div class="flex justify-between items-center mt-6">
+                            <button type="submit" class="w-full sm:w-auto px-8 py-3 bg-sky-600 text-white text-base font-bold rounded-xl shadow-md shadow-sky-500/30 hover:bg-sky-700 transition duration-300 focus:outline-none focus:ring-2 focus:ring-sky-500 focus:ring-offset-2 focus:ring-offset-gray-950">
+                                Run Prediction
+                            </button>
+                            <p class="text-xs text-gray-600 ml-4 hidden sm:block">
+                                Date/time features auto-calculated.
+                            </p>
+                        </div>
+                    </form>
+                </section>
+
+                <!-- 4. Feature Importance Table -->
+                <section class="bg-gray-900 rounded-xl shadow-2xl p-6 border border-gray-800 overflow-x-auto card-transition hover:scale-[1.005] shadow-black/60">
+                    <h2 class="text-xl font-bold text-gray-100 mb-4 border-b border-gray-800 pb-2">🔍 Feature Importance</h2>
+                    <p class="text-sm text-gray-400 mb-4">
+                        Features ranked by predictive power. Higher scores indicate greater influence on solar irradiance predictions.
+                    </p>
+                    <table class="w-full text-left text-sm text-gray-300 border-collapse">
+                        <thead class="bg-gray-800 text-xs uppercase text-gray-200">
+                            <tr>
+                                <th scope="col" class="px-3 py-3 rounded-tl-lg">#</th>
+                                <th scope="col" class="px-6 py-3">Feature</th>
+                                <th scope="col" class="px-6 py-3 text-right rounded-tr-lg">Importance Score</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            
+                            <!-- Features are now sequentially numbered 1-7 and all highlighted in amber -->
+                            <tr class="border-b border-gray-700 bg-amber-900/30 text-gray-100 font-bold hover:bg-amber-900/50">
+                                <td class="px-3 py-3 text-center w-10 text-xl text-amber-300">1</td>
+                                <td class="px-6 py-3">Month</td>
+                                <td class="px-6 py-3 text-right text-lg text-amber-300">4684.58</td>
+                            </tr>
+                            <tr class="border-b border-gray-700 bg-amber-900/30 text-gray-100 font-bold hover:bg-amber-900/50">
+                                <td class="px-3 py-3 text-center w-10 text-xl text-amber-300">2</td>
+                                <td class="px-6 py-3">Wind Direction</td>
+                                <td class="px-6 py-3 text-right text-lg text-amber-300">3271.83</td>
+                            </tr>
+                            <tr class="border-b border-gray-700 bg-amber-900/30 text-gray-100 font-bold hover:bg-amber-900/50">
+                                <td class="px-3 py-3 text-center w-10 text-xl text-amber-300">3</td>
+                                <td class="px-6 py-3">Day</td>
+                                <td class="px-6 py-3 text-right text-lg text-amber-300">2841.93</td>
+                            </tr>
+                            <tr class="border-b border-gray-700 bg-amber-900/30 text-gray-100 font-bold hover:bg-amber-900/50">
+                                <td class="px-3 py-3 text-center w-10 text-xl text-amber-300">4</td>
+                                <td class="px-6 py-3">Temperature</td>
+                                <td class="px-6 py-3 text-right text-lg text-amber-300">1651.69</td>
+                            </tr>
+                            <tr class="border-b border-gray-700 bg-amber-900/30 text-gray-100 font-bold hover:bg-amber-900/50">
+                                <td class="px-3 py-3 text-center w-10 text-xl text-amber-300">5</td>
+                                <td class="px-6 py-3">Humidity</td>
+                                <td class="px-6 py-3 text-right text-lg text-amber-300">1588.09</td>
+                            </tr>
+                            <tr class="border-b border-gray-700 bg-amber-900/30 text-gray-100 font-bold hover:bg-amber-900/50">
+                                <td class="px-3 py-3 text-center w-10 text-xl text-amber-300">6</td>
+                                <td class="px-6 py-3">Speed</td>
+                                <td class="px-6 py-3 text-right text-lg text-amber-300">765.86</td>
+                            </tr>
+                            <tr class="border-b border-gray-700 bg-amber-900/30 text-gray-100 font-bold hover:bg-amber-900/50">
+                                <td class="px-3 py-3 text-center w-10 text-xl text-amber-300">7</td>
+                                <td class="px-6 py-3">Pressure</td>
+                                <td class="px-6 py-3 text-right text-lg text-amber-300">523.79</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </section>
+            </div>
+            
+            <!-- COLUMN 2: Results, Analysis, and MODEL PERFORMANCE -->
+            <div class="flex flex-col gap-6">
+
+                <!-- 3. Result & AI Analysis Card (High Impact) -->
+                <section class="bg-gray-900 rounded-xl shadow-2xl p-6 ring-2 ring-gray-800 card-transition hover:scale-[1.005] shadow-black/60">
+                    <!-- Prediction Result -->
+                    <div class="mb-4 pb-4 border-b border-gray-800">
+                        <div class="text-base font-bold text-gray-400">Predicted Global Horizontal Irradiance (GHI)</div>
+                        <!-- Default text color set to vibrant sky blue -->
+                        <div id="prediction-value" class="text-6xl font-extrabold text-sky-400 mt-2">— W/m²</div>
+                        <div id="prediction-meta" class="text-xs text-gray-600 mt-2">Submit inputs to get started.</div>
+                    </div>
+                    
+                    <!-- AI Smart Analysis Section (High-Tech Console Look) -->
+                    <div class="analysis-container p-4 rounded-xl border border-gray-800 bg-black text-white min-h-32 shadow-xl" id="analysis-container" style="display:none;">
+                        <!-- Header color changed to light blue for contrast -->
+                        <div class="flex items-center gap-2 mb-3 text-cyan-400 font-bold border-b border-gray-800 pb-1">
+                            <span class="text-xl">🤖</span>
+                            <span>Smart Operational Analysis</span>
+                        </div>
+                        
+                        <div id="analysis-text" class="text-sm text-gray-200 leading-relaxed">
+                            <div class="dot-pulse">
+                                <span>Analyzing conditions</span>
+                                <span class="dot"></span>
+                                <span class="dot"></span>
+                                <span class="dot"></span>
+                            </div>
+                        </div>
+                        
+                        <!-- Disclaimer color changed to a light slate -->
+                        <p class="text-xs text-gray-500 mt-4 flex items-start gap-1">
+                            <span>ⓘ</span>
+                            <span>Recommendation derived from meteorological heuristic patterns.</span>
+                        </p>
+                    </div>
+                </section>
+                
+                <!-- 2. Model Performance Card -->
+                <section class="bg-gray-900 rounded-xl shadow-2xl p-6 border border-gray-800 min-h-60 card-transition hover:scale-[1.005] shadow-black/60">
+                    <h2 class="text-xl font-bold text-gray-100 mb-4 border-b border-gray-800 pb-2">📊 Model Performance</h2>
+                    <p class="text-sm text-gray-400 mb-4">
+                        Dataset: 32,686 meteorological observations (4 months). <br>Train/Test split: 26,148 / 6,538 samples.
+                    </p>
+                    <div class="flex flex-col space-y-3">
+                        <!-- Status boxes adjusted for dark mode contrast -->
+                        <div class="flex justify-between items-center p-3 rounded-xl bg-blue-900/40 border-l-8 border-blue-400 shadow-md">
+                            <span class="font-bold text-blue-300">R² Score (Goodness of Fit)</span>
+                            <span class="text-xl font-extrabold text-blue-200">0.93</span>
+                        </div>
+                        <div class="flex justify-between items-center p-3 rounded-xl bg-amber-900/40 border-l-8 border-amber-400 shadow-md">
+                            <span class="font-bold text-amber-300">MAE (Error Magnitude)</span>
+                            <span class="text-xl font-extrabold text-amber-200">33.19</span>
+                        </div>
+                        <div class="flex justify-between items-center p-3 rounded-xl bg-pink-900/40 border-l-8 border-pink-400 shadow-md">
+                            <span class="font-bold text-pink-300">RMSE (Outlier Sensitivity)</span>
+                            <span class="text-xl font-extrabold text-pink-200">82.99</span>
+                        </div>
+                    </div>
+                </section>
+            </div>
+            
+        </main>
+    </div>
+
+    <script>
+        // NOTE: The API_BASE_URL is assumed to be running locally as per the original prompt.
+        const API_BASE_URL = 'http://localhost:5000';
+        
+        const form = document.getElementById('predict-form');
+        const predictionValueEl = document.getElementById('prediction-value');
+        const predictionMetaEl = document.getElementById('prediction-meta');
+        const analysisContainer = document.getElementById('analysis-container');
+        const analysisText = document.getElementById('analysis-text');
+        
+        // Function to simulate exponential backoff for a more realistic fetch
+        async function fetchWithBackoff(url, options, retries = 3) {
+            for (let i = 0; i < retries; i++) {
+                try {
+                    const response = await fetch(url, options);
+                    if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+                    return await response.json();
+                } catch (error) {
+                    if (i === retries - 1) throw error;
+                    const delay = Math.pow(2, i) * 1000 + Math.random() * 1000;
+                    // console.log(`Retry ${i + 1}/${retries}. Waiting ${delay.toFixed(0)}ms...`);
+                    await new Promise(resolve => setTimeout(resolve, delay));
+                }
+            }
+        }
+
+        form.addEventListener('submit', async (ev) => {
+            ev.preventDefault();
+
+            // Client-side validation for non-negative values
+            const inputs = {
+                Temperature: parseFloat(document.getElementById('temperature').value),
+                Pressure: parseFloat(document.getElementById('pressure').value),
+                Humidity: parseFloat(document.getElementById('humidity').value),
+                WindDirection: parseFloat(document.getElementById('windDirection').value),
+                Speed: parseFloat(document.getElementById('windSpeed').value),
+            };
+
+            for (const [key, value] of Object.entries(inputs)) {
+                if (value < 0 && key !== 'Temperature') {
+                    predictionMetaEl.textContent = `Error: ${key} cannot be negative.`;
+                    return;
+                }
+            }
+            
+            // Auto-calculate time features
+            const now = new Date();
+            const payload = {
+                ...inputs,
+                Month: now.getMonth() + 1,
+                Day: now.getDate(),
+                Hour: now.getHours(),
+                Minute: now.getMinutes(),
+                Second: now.getSeconds(),
+                // Placeholder sunrise/sunset times (as per original data structure)
+                risehour: 6,
+                riseminute: 0,
+                sethour: 20,
+                setminute: 0
+            };
+
+            // Set Loading States
+            predictionValueEl.textContent = '...';
+            predictionMetaEl.textContent = 'Requesting prediction from backend...';
+            analysisContainer.style.display = 'block';
+            // Set analysis text to light color for the dark console background
+            analysisText.className = 'text-sm text-gray-200 leading-relaxed'; 
+            analysisText.innerHTML = `<div class="dot-pulse"><span>Analyzing conditions</span><span class="dot"></span><span class="dot"></span><span class="dot"></span></div>`;
+
+
+            try {
+                const data = await fetchWithBackoff(`${API_BASE_URL}/predict`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+                
+                // Simulate a fast result with a minimum display time
+                await new Promise(r => setTimeout(r, 500)); 
+
+                if (data.status === 'success' && typeof data.prediction === 'number') {
+                    // Update prediction value
+                    const prediction = Math.max(0, data.prediction); // Ensure prediction is non-negative
+                    predictionValueEl.textContent = `${prediction.toFixed(2)} W/m²`;
+                    
+                    // Dynamic color update based on prediction intensity (using dark mode friendly colors)
+                    predictionValueEl.className = `text-6xl font-extrabold mt-2 ${prediction > 800 ? 'text-green-400' : prediction > 400 ? 'text-amber-400' : 'text-sky-400'}`;
+                    
+                    predictionMetaEl.textContent = `Updated: ${new Date().toLocaleTimeString()} (GHI prediction)`;
+                    
+                    // Update AI analysis
+                    analysisText.innerHTML = data.ai_analysis;
+                } else {
+                    predictionValueEl.textContent = 'Error';
+                    predictionValueEl.className = 'text-6xl font-extrabold text-red-400 mt-2';
+                    predictionMetaEl.textContent = `Prediction failed: ${data.error || 'Unknown error.'}`;
+                    analysisContainer.style.display = 'none';
+                }
+            } catch (err) {
+                predictionValueEl.textContent = 'Error';
+                predictionValueEl.className = 'text-6xl font-extrabold text-red-400 mt-2';
+                predictionMetaEl.textContent = 'Network or API error. Is the Flask server running on localhost:5000?';
+                analysisText.textContent = 'Could not connect to the analysis service.';
+                console.error("API Call Error:", err);
+            }
+        });
+    </script>
+</body>
+</html>
