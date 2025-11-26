@@ -28,6 +28,7 @@ load_dotenv()
 
 # Now read the API key from environment
 GEMINI_API_KEY = os.getenv('GEMINI_API_KEY', 'YOUR_API_KEY_HERE')
+# Print status of API key loading
 
 # ============================================================================
 # LOAD MODEL AND SCALER
