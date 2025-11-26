@@ -16,7 +16,7 @@ SunGrid is an end-to-end machine learning pipeline for predicting solar irradian
 
 - Data Pipeline: Feature engineering (log, Box-Cox transformations) on weather and temporal variables.
 - Model: XGBoost trained on 32k+ sensor records (September 2016).
-- Backend: Flask API (/predict) for inference, plus endpoints for metrics and health checks.
+- Backend: Flask API (/app.py) for inference, plus endpoints for metrics and health checks.
 - Frontend: Interactive dashboard (Chart.js) for real-time visualization of predictions.
 
 ### 🚀 Live Demonstration
