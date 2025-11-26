@@ -10,6 +10,8 @@ from scipy import stats
 import traceback
 import os
 import requests
+import os
+from dotenv import load_dotenv
 
 app = Flask(__name__)
 CORS(app)
@@ -21,8 +23,11 @@ CORS(app)
 MODEL_PATH = 'model/xgboost_model.pkl'
 SCALER_PATH = 'model/scaler.pkl'
 
-# Your Gemini API Key
-GEMINI_API_KEY = "AIzaSyDyD0VJqK4whjuJFiUaE6NBAhO_rJloyC4"
+# Load environment variables from .env file
+load_dotenv()
+
+# Now read the API key from environment
+GEMINI_API_KEY = os.getenv('GEMINI_API_KEY', 'YOUR_API_KEY_HERE')
 
 # ============================================================================
 # LOAD MODEL AND SCALER
