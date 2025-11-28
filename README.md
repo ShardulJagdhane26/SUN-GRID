@@ -22,7 +22,7 @@ SunGrid is an end-to-end machine learning pipeline for predicting solar irradian
 ### 🚀 Live Demonstration
 
 Explore the interactive dashboard and real-time predictions:
-[SunGrid AI Dashboard](https://sungridai26.netlify.app/)
+[SunGrid AI Dashboard](https://sungrid26.netlify.app/)
 
 ### ⚙️ Quick Setup (Development)
 
