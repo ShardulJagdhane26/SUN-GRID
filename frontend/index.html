@@ -96,7 +96,7 @@
     </style>
 </head>
 <body class="p-4 sm:p-6 lg:p-8">
-    <div class="max-w-6xl mx-auto">
+    <div class="max-w-3xl mx-auto"> <!-- Centered container, slightly narrower for better single-column readability -->
         
         <!-- Header Section: Original Professional Content -->
         <header class="mb-10 pb-4 border-b-4 border-gray-700">
@@ -114,166 +114,160 @@
             </p>
         </header>
 
-        <main class="grid lg:grid-cols-2 gap-8">
+        <!-- MAIN CONTENT AREA - Now a single vertical stack (flex-col) -->
+        <main class="flex flex-col gap-8">
             
-            <!-- COLUMN 1: Inputs and FEATURE IMPORTANCE -->
-            <div class="flex flex-col gap-8">
-
-                <!-- 1. Weather Inputs Card: Original Content -->
-                <section class="comic-card p-6" aria-labelledby="inputs-heading">
-                    <h2 id="inputs-heading" class="text-2xl font-bold text-gray-800 mb-4 border-b-2 border-gray-300 pb-2">Weather Inputs</h2>
-                    <form id="predict-form">
-                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                            <!-- Input fields with original labels -->
-                            <div>
-                                <label for="temperature" class="block text-sm font-bold text-gray-700 mb-1">Temperature (°F)</label>
-                                <input id="temperature" type="number" step="0.1" required value="75" class="w-full p-3 border-2 border-gray-400 rounded-xl bg-yellow-50 focus:ring-pink-500 focus:border-pink-500 text-gray-800 shadow-inner">
-                            </div>
-                            <div>
-                                <label for="pressure" class="block text-sm font-bold text-gray-700 mb-1">Pressure (inHg)</label>
-                                <input id="pressure" type="number" step="0.01" required value="30.15" class="w-full p-3 border-2 border-gray-400 rounded-xl bg-yellow-50 focus:ring-pink-500 focus:border-pink-500 text-gray-800 shadow-inner">
-                            </div>
-                            <div>
-                                <label for="humidity" class="block text-sm font-bold text-gray-700 mb-1">Humidity (%)</label>
-                                <input id="humidity" type="number" step="0.1" required value="50" class="w-full p-3 border-2 border-gray-400 rounded-xl bg-yellow-50 focus:ring-pink-500 focus:border-pink-500 text-gray-800 shadow-inner">
-                            </div>
-                            <div>
-                                <label for="windSpeed" class="block text-sm font-bold text-gray-700 mb-1">Wind Speed (mph)</label>
-                                <input id="windSpeed" type="number" step="0.1" required value="5" class="w-full p-3 border-2 border-gray-400 rounded-xl bg-yellow-50 focus:ring-pink-500 focus:border-pink-500 text-gray-800 shadow-inner">
-                            </div>
-                            <div class="sm:col-span-2">
-                                <label for="windDirection" class="block text-sm font-bold text-gray-700 mb-1">Wind Direction (°)</label>
-                                <input id="windDirection" type="number" step="1" required value="180" class="w-full p-3 border-2 border-gray-400 rounded-xl bg-yellow-50 focus:ring-pink-500 focus:border-pink-500 text-gray-800 shadow-inner">
-                            </div>
+            <!-- 1. Weather Inputs Card: (Block 2 in vertical stack) -->
+            <section class="comic-card p-6" aria-labelledby="inputs-heading">
+                <h2 id="inputs-heading" class="text-2xl font-bold text-gray-800 mb-4 border-b-2 border-gray-300 pb-2">☀️ Weather Inputs</h2>
+                <form id="predict-form">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <!-- Input fields with original labels -->
+                        <div>
+                            <label for="temperature" class="block text-sm font-bold text-gray-700 mb-1">Temperature (°F)</label>
+                            <input id="temperature" type="number" step="0.1" required value="75" class="w-full p-3 border-2 border-gray-400 rounded-xl bg-yellow-50 focus:ring-pink-500 focus:border-pink-500 text-gray-800 shadow-inner">
                         </div>
-                        
-                        <div class="flex justify-center items-center mt-8">
-                            <button type="submit" class="comic-button px-10 py-4 bg-[#FFD700] text-gray-900 text-xl font-extrabold rounded-2xl hover:bg-[#FFC300] focus:outline-none focus:ring-4 focus:ring-pink-500 focus:ring-offset-2 focus:ring-offset-blue-50">
-                                Run Prediction
-                            </button>
+                        <div>
+                            <label for="pressure" class="block text-sm font-bold text-gray-700 mb-1">Pressure (inHg)</label>
+                            <input id="pressure" type="number" step="0.01" required value="30.15" class="w-full p-3 border-2 border-gray-400 rounded-xl bg-yellow-50 focus:ring-pink-500 focus:border-pink-500 text-gray-800 shadow-inner">
                         </div>
-                        <p class="text-xs text-gray-500 mt-4 text-center">
-                            Date/time features auto-calculated.
-                        </p>
-                    </form>
-                </section>
-
-                <!-- 4. Feature Importance Table: Original Content -->
-                <section class="comic-card p-6 overflow-x-auto">
-                    <h2 class="text-2xl font-bold text-gray-800 mb-4 border-b-2 border-gray-300 pb-2">🔍 Feature Importance</h2>
-                    <p class="text-base text-gray-600 mb-4">
-                        Features ranked by predictive power. Higher scores indicate greater influence on solar irradiance predictions.
-                    </p>
-                    <table class="w-full text-left text-base text-gray-700 border-collapse">
-                        <thead class="bg-[#87CEEB] text-white uppercase text-sm">
-                            <tr>
-                                <th scope="col" class="px-3 py-3 rounded-tl-xl border-r-2 border-gray-800">#</th>
-                                <th scope="col" class="px-6 py-3 border-r-2 border-gray-800">Feature Name</th>
-                                <th scope="col" class="px-6 py-3 text-right rounded-tr-xl">Importance Score</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            
-                            <!-- Rows with vibrant colors and bold text (Content remains the same) -->
-                            <tr class="border-b-2 border-gray-300 bg-red-100 hover:bg-red-200">
-                                <td class="px-3 py-3 text-center w-10 text-2xl text-red-600 font-extrabold">1</td>
-                                <td class="px-6 py-3 font-bold">Month</td>
-                                <td class="px-6 py-3 text-right text-xl text-red-600 font-extrabold">4684.58</td>
-                            </tr>
-                            <tr class="border-b-2 border-gray-300 bg-orange-100 hover:bg-orange-200">
-                                <td class="px-3 py-3 text-center w-10 text-2xl text-orange-600 font-extrabold">2</td>
-                                <td class="px-6 py-3 font-bold">Wind Direction</td>
-                                <td class="px-6 py-3 text-right text-xl text-orange-600 font-extrabold">3271.83</td>
-                            </tr>
-                            <tr class="border-b-2 border-gray-300 bg-yellow-100 hover:bg-yellow-200">
-                                <td class="px-3 py-3 text-center w-10 text-2xl text-yellow-600 font-extrabold">3</td>
-                                <td class="px-6 py-3 font-bold">Day</td>
-                                <td class="px-6 py-3 text-right text-xl text-yellow-600 font-extrabold">2841.93</td>
-                            </tr>
-                            <tr class="border-b-2 border-gray-300 bg-green-100 hover:bg-green-200">
-                                <td class="px-3 py-3 text-center w-10 text-2xl text-green-600 font-extrabold">4</td>
-                                <td class="px-6 py-3 font-bold">Temperature</td>
-                                <td class="px-6 py-3 text-right text-xl text-green-600 font-extrabold">1651.69</td>
-                            </tr>
-                            <tr class="border-b-2 border-gray-300 bg-blue-100 hover:bg-blue-200">
-                                <td class="px-3 py-3 font-bold text-center w-10 text-2xl text-blue-600">5</td>
-                                <td class="px-6 py-3 font-bold">Humidity</td>
-                                <td class="px-6 py-3 text-right text-xl text-blue-600 font-extrabold">1588.09</td>
-                            </tr>
-                            <tr class="border-b-2 border-gray-300 bg-indigo-100 hover:bg-indigo-200">
-                                <td class="px-3 py-3 text-center w-10 text-2xl text-indigo-600 font-extrabold">6</td>
-                                <td class="px-6 py-3 font-bold">Speed</td>
-                                <td class="px-6 py-3 text-right text-xl text-indigo-600 font-extrabold">765.86</td>
-                            </tr>
-                            <tr class="bg-purple-100 hover:bg-purple-200">
-                                <td class="px-3 py-3 text-center w-10 text-2xl text-purple-600 font-extrabold">7</td>
-                                <td class="px-6 py-3 font-bold">Pressure</td>
-                                <td class="px-6 py-3 text-right text-xl text-purple-600 font-extrabold">523.79</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </section>
-            </div>
-            
-            <!-- COLUMN 2: Results, Analysis, and MODEL PERFORMANCE -->
-            <div class="flex flex-col gap-8">
-
-                <!-- 3. Result & AI Analysis Card: Original Content -->
-                <section class="comic-card p-6 ring-4 ring-[#87CEEB] ring-offset-4 ring-offset-blue-50">
-                    <!-- Prediction Result -->
-                    <div class="mb-4 pb-4 border-b-2 border-gray-300">
-                        <div class="text-xl font-bold text-gray-600">Predicted Global Horizontal Irradiance (GHI)</div>
-                        <!-- Default text color set to vibrant pink -->
-                        <div id="prediction-value" class="text-7xl font-extrabold text-[#FF6384] mt-2">— W/m²</div>
-                        <div id="prediction-meta" class="text-sm text-gray-500 mt-2">Submit inputs to get started.</div>
+                        <div>
+                            <label for="humidity" class="block text-sm font-bold text-gray-700 mb-1">Humidity (%)</label>
+                            <input id="humidity" type="number" step="0.1" required value="50" class="w-full p-3 border-2 border-gray-400 rounded-xl bg-yellow-50 focus:ring-pink-500 focus:border-pink-500 text-gray-800 shadow-inner">
+                        </div>
+                        <div>
+                            <label for="windSpeed" class="block text-sm font-bold text-gray-700 mb-1">Wind Speed (mph)</label>
+                            <input id="windSpeed" type="number" step="0.1" required value="5" class="w-full p-3 border-2 border-gray-400 rounded-xl bg-yellow-50 focus:ring-pink-500 focus:border-pink-500 text-gray-800 shadow-inner">
+                        </div>
+                        <div class="sm:col-span-2">
+                            <label for="windDirection" class="block text-sm font-bold text-gray-700 mb-1">Wind Direction (°)</label>
+                            <input id="windDirection" type="number" step="1" required value="180" class="w-full p-3 border-2 border-gray-400 rounded-xl bg-yellow-50 focus:ring-pink-500 focus:border-pink-500 text-gray-800 shadow-inner">
+                        </div>
                     </div>
                     
-                    <!-- AI Smart Analysis Section: Original Content -->
-                    <div class="analysis-container p-4 rounded-xl border-4 border-[#00BFFF] bg-white text-gray-800 min-h-32 shadow-2xl" id="analysis-container" style="display:none; box-shadow: 4px 4px 0px #00BFFF;">
-                        <!-- Header color changed to light blue for contrast -->
-                        <div class="flex items-center gap-2 mb-3 text-blue-600 font-extrabold border-b border-gray-300 pb-1">
-                            <span class="text-3xl">🤖</span>
-                            <span class="text-xl">Smart Operational Analysis</span>
-                        </div>
-                        
-                        <div id="analysis-text" class="text-base text-gray-700 leading-relaxed">
-                            <div class="dot-pulse">
-                                <span>Analyzing conditions</span>
-                                <span class="dot"></span>
-                                <span class="dot"></span>
-                                <span class="dot"></span>
-                            </div>
-                        </div>
-                        
-                        <p class="text-xs text-gray-500 mt-4 flex items-start gap-1">
-                            <span>ⓘ Recommendation derived from meteorological heuristic patterns.</span>
-                        </p>
+                    <div class="flex justify-center items-center mt-8">
+                        <button type="submit" class="comic-button px-10 py-4 bg-[#FFD700] text-gray-900 text-xl font-extrabold rounded-2xl hover:bg-[#FFC300] focus:outline-none focus:ring-4 focus:ring-pink-500 focus:ring-offset-2 focus:ring-offset-blue-50">
+                            Run Prediction
+                        </button>
                     </div>
-                </section>
-                
-                <!-- 2. Model Performance Card: Original Content -->
-                <section class="comic-card p-6 min-h-60">
-                    <h2 class="text-2xl font-bold text-gray-800 mb-4 border-b-2 border-gray-300 pb-2">📊 Model Performance</h2>
-                    <p class="text-base text-gray-600 mb-4">
-                        Dataset: 32,686 meteorological observations (4 months). <br>Train/Test split: 26,148 / 6,538 samples.
+                    <p class="text-xs text-gray-500 mt-4 text-center">
+                        Date/time features auto-calculated.
                     </p>
-                    <div class="flex flex-col space-y-4">
-                        <!-- Metric boxes adjusted for cartoon theme -->
-                        <div class="flex justify-between items-center p-4 rounded-xl bg-lime-200 border-l-8 border-lime-500 shadow-md">
-                            <span class="font-extrabold text-lime-800 text-lg">R² Score (Goodness of Fit)</span>
-                            <span class="text-2xl font-extrabold text-lime-900">0.93</span>
-                        </div>
-                        <div class="flex justify-between items-center p-4 rounded-xl bg-purple-200 border-l-8 border-purple-500 shadow-md">
-                            <span class="font-extrabold text-purple-800 text-lg">MAE (Error Magnitude)</span>
-                            <span class="text-2xl font-extrabold text-purple-900">33.19</span>
-                        </div>
-                        <div class="flex justify-between items-center p-4 rounded-xl bg-rose-200 border-l-8 border-rose-500 shadow-md">
-                            <span class="font-extrabold text-rose-800 text-lg">RMSE (Outlier Sensitivity)</span>
-                            <span class="text-2xl font-extrabold text-rose-900">82.99</span>
+                </form>
+            </section>
+
+            <!-- 2. Result & AI Analysis Card (Prediction Block - Block 3 in vertical stack) -->
+            <section class="comic-card p-6 ring-4 ring-[#87CEEB] ring-offset-4 ring-offset-blue-50">
+                <!-- Prediction Result -->
+                <div class="mb-4 pb-4 border-b-2 border-gray-300">
+                    <div class="text-xl font-bold text-gray-600">Predicted Global Horizontal Irradiance (GHI)</div>
+                    <!-- Dynamic font sizing applied: text-5xl for mobile, sm:text-7xl for desktop -->
+                    <div id="prediction-value" class="text-5xl sm:text-7xl font-extrabold text-[#FF6384] mt-2">— W/m²</div>
+                    <div id="prediction-meta" class="text-sm text-gray-500 mt-2">Submit inputs to get started.</div>
+                </div>
+                
+                <!-- AI Smart Analysis Section: Original Content -->
+                <div class="analysis-container p-4 rounded-xl border-4 border-[#00BFFF] bg-white text-gray-800 min-h-32 shadow-2xl" id="analysis-container" style="display:none; box-shadow: 4px 4px 0px #00BFFF;">
+                    <!-- Header color changed to light blue for contrast -->
+                    <div class="flex items-center gap-2 mb-3 text-blue-600 font-extrabold border-b border-gray-300 pb-1">
+                        <span class="text-3xl">🤖</span>
+                        <span class="text-xl">Smart Operational Analysis</span>
+                    </div>
+                    
+                    <div id="analysis-text" class="text-base text-gray-700 leading-relaxed">
+                        <div class="dot-pulse">
+                            <span>Analyzing conditions</span>
+                            <span class="dot"></span>
+                            <span class="dot"></span>
+                            <span class="dot"></span>
                         </div>
                     </div>
-                </section>
-            </div>
+                    
+                    <p class="text-xs text-gray-500 mt-4 flex items-start gap-1">
+                        <span>ⓘ Recommendation derived from meteorological heuristic patterns.</span>
+                    </p>
+                </div>
+            </section>
+            
+            <!-- 3. Feature Importance Table: (Block 4 in vertical stack) -->
+            <section class="comic-card p-6 overflow-x-auto">
+                <h2 class="text-2xl font-bold text-gray-800 mb-4 border-b-2 border-gray-300 pb-2">🔍 Feature Importance</h2>
+                <p class="text-base text-gray-600 mb-4">
+                    Features ranked by predictive power. Higher scores indicate greater influence on solar irradiance predictions.
+                </p>
+                <table class="w-full text-left text-base text-gray-700 border-collapse border-2 border-gray-700 rounded-xl overflow-hidden">
+                    <thead class="bg-[#87CEEB] text-white uppercase text-sm">
+                        <tr>
+                            <!-- Reduced horizontal padding (px-2) on mobile -->
+                            <th scope="col" class="px-2 sm:px-3 py-3 rounded-tl-xl border-r-2 border-gray-800">#</th>
+                            <th scope="col" class="px-4 sm:px-6 py-3 border-r-2 border-gray-800">Feature Name</th>
+                            <th scope="col" class="px-4 sm:px-6 py-3 text-right rounded-tr-xl">Importance Score</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        
+                        <!-- Rows with dynamic padding and font sizes for mobile, and new vertical borders (border-r-2) -->
+                        <tr class="border-b-2 border-gray-300 bg-red-100 hover:bg-red-200">
+                            <td class="px-2 sm:px-3 py-3 text-center w-10 text-xl sm:text-2xl text-red-600 font-extrabold border-r-2 border-gray-800">1</td>
+                            <td class="px-4 sm:px-6 py-3 font-bold border-r-2 border-gray-800">Month</td>
+                            <td class="px-4 sm:px-6 py-3 text-right text-lg sm:text-xl text-red-600 font-extrabold">4684.58</td>
+                        </tr>
+                        <tr class="border-b-2 border-gray-300 bg-orange-100 hover:bg-orange-200">
+                            <td class="px-2 sm:px-3 py-3 text-center w-10 text-xl sm:text-2xl text-orange-600 font-extrabold border-r-2 border-gray-800">2</td>
+                            <td class="px-4 sm:px-6 py-3 font-bold border-r-2 border-gray-800">Wind Direction</td>
+                            <td class="px-4 sm:px-6 py-3 text-right text-lg sm:text-xl text-orange-600 font-extrabold">3271.83</td>
+                        </tr>
+                        <tr class="border-b-2 border-gray-300 bg-yellow-100 hover:bg-yellow-200">
+                            <td class="px-2 sm:px-3 py-3 text-center w-10 text-xl sm:text-2xl text-yellow-600 font-extrabold border-r-2 border-gray-800">3</td>
+                            <td class="px-4 sm:px-6 py-3 font-bold border-r-2 border-gray-800">Day</td>
+                            <td class="px-4 sm:px-6 py-3 text-right text-lg sm:text-xl text-yellow-600 font-extrabold">2841.93</td>
+                        </tr>
+                        <tr class="border-b-2 border-gray-300 bg-green-100 hover:bg-green-200">
+                            <td class="px-2 sm:px-3 py-3 text-center w-10 text-xl sm:text-2xl text-green-600 font-extrabold border-r-2 border-gray-800">4</td>
+                            <td class="px-4 sm:px-6 py-3 font-bold border-r-2 border-gray-800">Temperature</td>
+                            <td class="px-4 sm:px-6 py-3 text-right text-lg sm:text-xl text-green-600 font-extrabold">1651.69</td>
+                        </tr>
+                        <tr class="border-b-2 border-gray-300 bg-blue-100 hover:bg-blue-200">
+                            <td class="px-2 sm:px-3 py-3 font-bold text-center w-10 text-xl sm:text-2xl text-blue-600 border-r-2 border-gray-800">5</td>
+                            <td class="px-4 sm:px-6 py-3 font-bold border-r-2 border-gray-800">Humidity</td>
+                            <td class="px-4 sm:px-6 py-3 text-right text-lg sm:text-xl text-blue-600 font-extrabold">1588.09</td>
+                        </tr>
+                        <tr class="border-b-2 border-gray-300 bg-indigo-100 hover:bg-indigo-200">
+                            <td class="px-2 sm:px-3 py-3 text-center w-10 text-xl sm:text-2xl text-indigo-600 font-extrabold border-r-2 border-gray-800">6</td>
+                            <td class="px-4 sm:px-6 py-3 font-bold border-r-2 border-gray-800">Speed</td>
+                            <td class="px-4 sm:px-6 py-3 text-right text-lg sm:text-xl text-indigo-600 font-extrabold">765.86</td>
+                        </tr>
+                        <tr class="bg-purple-100 hover:bg-purple-200">
+                            <td class="px-2 sm:px-3 py-3 text-center w-10 text-xl sm:text-2xl text-purple-600 font-extrabold border-r-2 border-gray-800">7</td>
+                            <td class="px-4 sm:px-6 py-3 font-bold border-r-2 border-gray-800">Pressure</td>
+                            <td class="px-4 sm:px-6 py-3 text-right text-lg sm:text-xl text-purple-600 font-extrabold">523.79</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+
+            <!-- 4. Model Performance Card (Block 5 in vertical stack) -->
+            <section class="comic-card p-6 min-h-60">
+                <h2 class="text-2xl font-bold text-gray-800 mb-4 border-b-2 border-gray-300 pb-2">📊 Model Performance</h2>
+                <p class="text-base text-gray-600 mb-4">
+                    Dataset: 32,686 meteorological observations (4 months). <br>Train/Test split: 26,148 / 6,538 samples.
+                </p>
+                <div class="flex flex-col space-y-4">
+                    <!-- Metric boxes adjusted for cartoon theme -->
+                    <div class="flex justify-between items-center p-4 rounded-xl bg-lime-200 border-l-8 border-lime-500 shadow-md">
+                        <span class="font-extrabold text-lime-800 text-lg">R² Score <br>(Goodness of Fit)</span>
+                        <span class="text-2xl font-extrabold text-lime-900">0.93</span>
+                    </div>
+                    <div class="flex justify-between items-center p-4 rounded-xl bg-purple-200 border-l-8 border-purple-500 shadow-md">
+                        <span class="font-extrabold text-purple-800 text-lg">MAE <br>(Error Magnitude)</span>
+                        <span class="text-2xl font-extrabold text-purple-900">33.19</span>
+                    </div>
+                    <div class="flex justify-between items-center p-4 rounded-xl bg-rose-200 border-l-8 border-rose-500 shadow-md">
+                        <span class="font-extrabold text-rose-800 text-lg">RMSE <br>(Outlier Sensitivity)</span>
+                        <span class="text-2xl font-extrabold text-rose-900">82.99</span>
+                    </div>
+                </div>
+            </section>
             
         </main>
     </div>
@@ -376,7 +370,7 @@
                     } else {
                         resultColorClass = 'text-blue-600'; // Low Power - Blue
                     }
-                    predictionValueEl.className = `text-7xl font-extrabold mt-2 ${resultColorClass}`;
+                    predictionValueEl.className = `text-5xl sm:text-7xl font-extrabold mt-2 ${resultColorClass}`;
                     
                     predictionMetaEl.textContent = `⚡ Updated: ${new Date().toLocaleTimeString()}`;
                     
@@ -384,13 +378,13 @@
                     analysisText.innerHTML = data.ai_analysis;
                 } else {
                     predictionValueEl.textContent = 'WHOOPS!';
-                    predictionValueEl.className = 'text-7xl font-extrabold text-red-600 mt-2';
+                    predictionValueEl.className = 'text-5xl sm:text-7xl font-extrabold text-red-600 mt-2';
                     predictionMetaEl.textContent = `Uh oh! The forecast machine broke: ${data.error || 'Unknown error.'}`;
                     analysisText.textContent = 'The model needs more sunshine data to make a tip!';
                 }
             } catch (err) {
                 predictionValueEl.textContent = 'WHOOPS!';
-                predictionValueEl.className = 'text-7xl font-extrabold text-red-600 mt-2';
+                predictionValueEl.className = 'text-5xl sm:text-7xl font-extrabold text-red-600 mt-2';
                 predictionMetaEl.textContent = 'A big network cloud is blocking the signal! Check the API.';
                 analysisText.textContent = 'Cannot connect to the analysis service! Is the server on?';
                 console.error("API Call Error:", err);
